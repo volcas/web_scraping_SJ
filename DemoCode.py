@@ -10,9 +10,7 @@ Created on Thu Apr 30 17:27:15 2020
 # Header files
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-from time import sleep
 import pandas as pd    
-from selenium.webdriver.support.select import Select
 
 
 
