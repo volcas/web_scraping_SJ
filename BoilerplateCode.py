@@ -24,10 +24,13 @@ def search_cuisine(cuisine_name):
     #Input the cuisine
     search_item.send_keys(cuisine_name)    
     driver.find_element_by_id("search_button").click()
+    driver.find_element_by_id("search_button").click()
+
+    WebDriverWait(driver, 500).until(lambda driver: driver.find_element_by_class_name("close"))
     driver.find_element_by_class_name("close").click()
-    
-    
-    # Click on the search button
+#    
+#    
+#    # Click on the search button
     driver.find_element_by_id("search_button").click()
 
     return    
@@ -111,3 +114,4 @@ for listing in listings:
   
 # Storing the dataframe in a CSV file          
 df.to_csv("Zomato_data.csv")
+
