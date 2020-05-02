@@ -81,12 +81,16 @@ for listing in listings:
     driver.switch_to.window(new_window)
     
     # Storing restaurant name  
-    WebDriverWait(driver, 100).until(lambda driver: driver.find_element_by_xpath("//*[@class='sc-7kepeu-0 sc-ivVeuv kBFhIT']"))
-    rest_name=driver.find_element_by_xpath("//*[@class='sc-7kepeu-0 sc-ivVeuv kBFhIT']").text
+    WebDriverWait(driver, 500).until(lambda driver: driver.find_element_by_xpath("//h1[@class='sc-7kepeu-0 sc-ivVeuv kBFhIT']").text)
+    rest_name=driver.find_element_by_xpath("//h1[@class='sc-7kepeu-0 sc-ivVeuv kBFhIT']").text
     
     # Storing restaurant cuisine
-    WebDriverWait(driver, 100).until(lambda driver: driver.find_element_by_xpath("//*[@class='sc-hdPSEv kBGNIy']"))
-    rest_cuisine=driver.find_element_by_xpath("//*[@class='sc-hdPSEv kBGNIy']").text
+    WebDriverWait(driver, 100).until(lambda driver: driver.find_elements_by_xpath("//*[@class='sc-hdPSEv kBGNIy']"))
+    rest_cuisine=driver.find_elements_by_xpath("//*[@class='sc-hdPSEv kBGNIy']")
+    
+    cuisine_list= []
+    for cuisine in rest_cuisine:
+        cuisine_list.append(cuisine.text)
     
     # Storing restaurant rating
     WebDriverWait(driver, 100).until(lambda driver: driver.find_element_by_xpath("//*[@class='sc-cgHJcJ jzevHZ']"))
@@ -97,7 +101,7 @@ for listing in listings:
     rest_location=driver.find_element_by_xpath("//*[@class='sc-cmIlrE kbEObq']").text
     
     # Storing the data in dataframe
-    df = df.append({'Name': rest_name,'cuisine': rest_cuisine,'location':rest_location, 'rating':rest_rating,'url':url}, ignore_index=True)   
+    df = df.append({'Name': rest_name,'cuisine': cuisine_list,'location':rest_location, 'rating':rest_rating,'url':url}, ignore_index=True)   
 
     driver.close()
     
